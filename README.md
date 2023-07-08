@@ -41,6 +41,19 @@ package fixtures
 //go:generate go run go.uber.org/mock/mockgen -destination mock_foo/mock_foo.go -package mock_foo . IFoo,IBar
 ```
 
+You can also use mockgengen with `//go:generate` comment.
+
+```go
+package foo
+
+//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen -package mock_foo -out ./mockgen.go . Iset
+
+var Iset = []any{
+	new(IFoo),
+	new(IBar),
+}
+```
+
 ## Restriction
 
 - Mockgengen is available for gomock's reflect mode. Source mode is currently not available.
