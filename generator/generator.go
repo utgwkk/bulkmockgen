@@ -10,6 +10,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/tools/go/packages"
 )
 
 const (
@@ -68,7 +70,19 @@ func (g *Generator) Generate() error {
 }
 
 func (g *Generator) findMockSet(sourceDir string) ([]string, error) {
+	if sourceDir != "." {
+		return g.findMockSetFromPackage(sourceDir)
+	}
 	return g.findMockSetFromDirectory(sourceDir)
+}
+
+func (g *Generator) findMockSetFromPackage(packagePath string) ([]string, error) {
+	pp, err := packages.Load(&packages.Config{}, packagePath)
+	if err != nil {
+		return nil, err
+	}
+	pkg := pp[0]
+	return g.findMockSetFromDirectory(pkg.Module.Dir)
 }
 
 func (g *Generator) findMockSetFromDirectory(sourceDir string) ([]string, error) {

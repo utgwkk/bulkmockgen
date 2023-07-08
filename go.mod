@@ -6,6 +6,7 @@ require (
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gkampitakis/go-snaps v0.4.8
 	github.com/stoewer/go-strcase v1.3.0
+	golang.org/x/tools v0.11.0
 )
 
 require (
@@ -18,4 +19,6 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
+	golang.org/x/mod v0.12.0 // indirect
+	golang.org/x/sys v0.10.0 // indirect
 )
