@@ -159,44 +159,51 @@ func (m *Migrator) Migrate() error {
 
 func removeGoGenerateComment(comments []*ast.CommentGroup, goGenerateComments []*mockgenComment) []*ast.CommentGroup {
 	var removedComments []*ast.CommentGroup
-OUTER:
 	for _, c := range comments {
-		for _, gc := range goGenerateComments {
-			if c == gc.commentGroup {
-				continue OUTER
+		var clist []*ast.Comment
+	SKIP_COMMENT:
+		for _, comment := range c.List {
+			for _, gc := range goGenerateComments {
+				if comment == gc.comment {
+					continue SKIP_COMMENT
+				}
 			}
+			clist = append(clist, comment)
 		}
+		c.List = clist
 		removedComments = append(removedComments, c)
 	}
 	return removedComments
 }
 
 type mockgenComment struct {
-	commentGroup   *ast.CommentGroup
+	comment        *ast.Comment
 	normalizedText string
 }
 
 func findMockgenGoGenerateComments(f *ast.File) []*mockgenComment {
-	var commentGroups []*mockgenComment
+	var comments []*mockgenComment
 
 	for _, c := range f.Comments {
-		commentText := c.List[0].Text
-		if !strings.HasPrefix(commentText, "//go:generate") {
-			continue
-		}
+		for _, comment := range c.List {
+			commentText := comment.Text
+			if !strings.HasPrefix(commentText, "//go:generate") {
+				continue
+			}
 
-		trimmed := strings.TrimPrefix(commentText, "//go:generate ")
-		normalized, ok := detectAndNormalizeMockgenGoGenerateComment(trimmed)
-		if !ok {
-			continue
-		}
+			trimmed := strings.TrimPrefix(commentText, "//go:generate ")
+			normalized, ok := detectAndNormalizeMockgenGoGenerateComment(trimmed)
+			if !ok {
+				continue
+			}
 
-		commentGroups = append(commentGroups, &mockgenComment{
-			commentGroup:   c,
-			normalizedText: normalized,
-		})
+			comments = append(comments, &mockgenComment{
+				comment:        comment,
+				normalizedText: normalized,
+			})
+		}
 	}
-	return commentGroups
+	return comments
 }
 
 func detectAndNormalizeMockgenGoGenerateComment(comment string) (string, bool) {

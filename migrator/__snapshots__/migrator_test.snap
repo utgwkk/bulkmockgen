@@ -12,3 +12,14 @@ var MockFoos = []any{
 }
 
 ---
+
+[TestGenerate/multi_line - 1]
+package multiline
+
+//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen -package mock_foo -out ./mock_foo.go . MockFoos
+var MockFoos = []any{
+    new(IBar),
+    new(IFoo),
+}
+
+---

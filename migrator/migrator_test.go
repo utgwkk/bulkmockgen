@@ -18,6 +18,12 @@ func TestGenerate(t *testing.T) {
 				InputDir: "./fixtures/multifile",
 			},
 		},
+		{
+			name: "multi line",
+			m: &Migrator{
+				InputDir: "./fixtures/multiline",
+			},
+		},
 	}
 	for _, tc := range testcases {
 		tc := tc
