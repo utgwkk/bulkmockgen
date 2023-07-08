@@ -1,6 +1,12 @@
 # mockgengen
 Generate go:generate comment for mockgen
 
+## Installation
+
+```
+go install github.com/utgwkk/mockgengen/cmd/mockgengen@latest
+```
+
 ## Usage
 
 ```go
