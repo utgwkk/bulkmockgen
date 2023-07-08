@@ -57,3 +57,11 @@ var Iset = []any{
 ## Restriction
 
 - Mockgengen is available for gomock's reflect mode. Source mode is currently not available.
+
+## Migrate from mockgen
+
+There is a migration tool `mockgen-to-mockgengen`. You can rewrite `//go:generate mockgen` comments to mockgengen's all at once.
+
+```
+go install github.com/utgwkk/mockgengen/cmd/mockgen-to-mockgengen@latest
+```
