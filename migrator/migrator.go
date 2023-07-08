@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"go/ast"
+	"go/format"
 	"go/parser"
 	"go/token"
 	"io"
@@ -24,9 +25,9 @@ var mockgenCommandCandidates = []string{
 }
 
 type Migrator struct {
-	InputDir       string
-	OutputPath     string
-	OverwriteInput bool
+	InputDir         string
+	OutputPath       string
+	NoOverwriteInput bool
 
 	writer io.Writer // for testing
 }
@@ -98,7 +99,58 @@ func (m *Migrator) Migrate() error {
 		w.Write([]byte("}\n"))
 	}
 
+	if m.NoOverwriteInput {
+		return nil
+	}
+
+	for _, pkg := range parsed {
+		for filename, f := range pkg.Files {
+			f.Comments = removeGoGenerateComment(f.Comments, comments)
+
+			err := func() error {
+				fout, err := os.CreateTemp(os.TempDir(), "mockgen-to-mockgengen")
+				if err != nil {
+					return err
+				}
+				defer fout.Close()
+
+				if err := format.Node(fout, fset, f); err != nil {
+					return err
+				}
+				fout.Seek(0, 0)
+
+				srcFile, err := os.Create(filename)
+				if err != nil {
+					return err
+				}
+				defer srcFile.Close()
+
+				if _, err := io.Copy(srcFile, fout); err != nil {
+					return err
+				}
+
+				return nil
+			}()
+			if err != nil {
+				return err
+			}
+		}
+	}
 	return nil
+}
+
+func removeGoGenerateComment(comments []*ast.CommentGroup, goGenerateComments []*mockgenComment) []*ast.CommentGroup {
+	var removedComments []*ast.CommentGroup
+OUTER:
+	for _, c := range comments {
+		for _, gc := range goGenerateComments {
+			if c == gc.commentGroup {
+				continue OUTER
+			}
+		}
+		removedComments = append(removedComments, c)
+	}
+	return removedComments
 }
 
 type mockgenComment struct {
