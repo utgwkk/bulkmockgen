@@ -1,5 +1,6 @@
 # mockgengen
-Generate go:generate comment for mockgen
+
+Generate mock code all at once
 
 ## Installation
 
