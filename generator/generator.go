@@ -70,7 +70,7 @@ func (g *Generator) Generate() error {
 }
 
 func (g *Generator) findMockSet(sourceDir string) ([]string, error) {
-	if sourceDir != "." {
+	if 	_, err := os.Stat(sourceDir); os.IsNotExist(err) {
 		return g.findMockSetFromPackage(sourceDir)
 	}
 	return g.findMockSetFromDirectory(sourceDir)
