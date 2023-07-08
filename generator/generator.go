@@ -8,7 +8,6 @@ import (
 	"go/parser"
 	"go/token"
 	"os"
-	"os/exec"
 	"strings"
 
 	"golang.org/x/tools/go/packages"
@@ -18,6 +17,8 @@ const (
 	mockgenPackage = "go.uber.org/mock/mockgen"
 )
 
+type runnerFactory func(ctx context.Context, cmdExecutable string, cmdArgs ...string) Runner
+
 type Generator struct {
 	UseGoRun    bool
 	DryRun      bool
@@ -25,7 +26,7 @@ type Generator struct {
 	RestArgs    []string
 }
 
-func (g *Generator) Generate(ctx context.Context) error {
+func (g *Generator) Generate(ctx context.Context, rf runnerFactory) error {
 	mockSet, err := g.findMockSet(".")
 	if err != nil {
 		return err
@@ -46,10 +47,8 @@ func (g *Generator) Generate(ctx context.Context) error {
 		fmt.Printf("%s %s", cmdExecutable, strings.Join(cmdArgs, " "))
 		return nil
 	}
-	cmd := exec.CommandContext(ctx, cmdExecutable, cmdArgs...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
+	runner := rf(ctx, cmdExecutable, cmdArgs...)
+	if err := runner.Run(); err != nil {
 		return err
 	}
 

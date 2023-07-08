@@ -5,6 +5,7 @@ import (
 	"flag"
 	"log"
 	"os"
+	"os/exec"
 	"os/signal"
 
 	"github.com/utgwkk/mockgengen/generator"
@@ -36,8 +37,14 @@ func main() {
 		MockSetName: mockSetName,
 		RestArgs:    args[restSeparatorIdx+1:],
 	}
+	rf := func(ctx context.Context, cmdExecutable string, cmdArgs... string) generator.Runner {
+		cmd := exec.CommandContext(ctx, cmdExecutable, cmdArgs...)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		return cmd
+	}
 
-	if err := g.Generate(ctx); err != nil {
+	if err := g.Generate(ctx, rf); err != nil {
 		log.Fatal(err)
 	}
 }
