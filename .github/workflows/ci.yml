@@ -19,8 +19,8 @@ jobs:
       - name: Test
         run: |
           set -o pipefail
-          go test ./... -json | tee ./go-test.out | go run github.com/mfridman/tparse -all
+          go test ./... -json | tee ./go-test.out | tparse -all
       - name: Add job summary
         if: always()
         run: |
-          go run github.com/mfridman/tparse -file ./go-test.out -format markdown >> $GITHUB_STEP_SUMMARY
+          tparse -file ./go-test.out -format markdown >> $GITHUB_STEP_SUMMARY
