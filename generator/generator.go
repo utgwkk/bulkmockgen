@@ -1,14 +1,14 @@
 package generator
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"io"
 	"os"
-	"path/filepath"
+	"os/exec"
 	"strings"
 
 	"golang.org/x/tools/go/packages"
@@ -19,58 +19,45 @@ const (
 )
 
 type Generator struct {
-	UseGoRun      bool
-	PackageName   string
-	SourcePackage string
-	MockSetName   string
-	FileOut       string
-
-	writer io.Writer // for testing
+	UseGoRun    bool
+	DryRun      bool
+	MockSetName string
+	RestArgs    []string
 }
 
-func (g *Generator) Generate() error {
-	mockSet, err := g.findMockSet(g.SourcePackage)
+func (g *Generator) Generate(ctx context.Context) error {
+	mockSet, err := g.findMockSet(".")
 	if err != nil {
 		return err
 	}
-	abspath, err := filepath.Abs(g.SourcePackage)
-	if err != nil {
-		return err
-	}
-	splittedPath := strings.Split(filepath.ToSlash(abspath), "/")
-	sourcePkg := splittedPath[len(splittedPath)-1]
 
-	destination := filepath.Join(g.PackageName, g.PackageName+".go")
-	mockgen := "mockgen"
+	var cmdExecutable string
+	var cmdArgs []string
 	if g.UseGoRun {
-		mockgen = "go run " + mockgenPackage
-	}
-	var f io.Writer
-	if g.writer != nil {
-		f = g.writer
-	} else if g.FileOut == "" {
-		f = os.Stdout
+		cmdExecutable = "go"
+		cmdArgs = append(cmdArgs, "run", mockgenPackage)
 	} else {
-		file, err := os.Create(g.FileOut)
-		if err != nil {
-			return err
-		}
-		defer file.Close()
-		f = file
+		cmdExecutable = "mockgen"
 	}
-	writeOutTo(f, sourcePkg, &dumpCommentOption{
-		mockgenCmd:     mockgen,
-		destination:    destination,
-		packageName:    g.PackageName,
-		sourcePackage:  ".",
-		interfaceNames: mockSet,
-	})
+	cmdArgs = append(cmdArgs, g.RestArgs...)
+	cmdArgs = append(cmdArgs, ".")
+	cmdArgs = append(cmdArgs, strings.Join(mockSet, ","))
+	if g.DryRun {
+		fmt.Printf("%s %s", cmdExecutable, strings.Join(cmdArgs, " "))
+		return nil
+	}
+	cmd := exec.CommandContext(ctx, cmdExecutable, cmdArgs...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return err
+	}
 
 	return nil
 }
 
 func (g *Generator) findMockSet(sourceDir string) ([]string, error) {
-	if 	_, err := os.Stat(sourceDir); os.IsNotExist(err) {
+	if _, err := os.Stat(sourceDir); os.IsNotExist(err) {
 		return g.findMockSetFromPackage(sourceDir)
 	}
 	return g.findMockSetFromDirectory(sourceDir)
