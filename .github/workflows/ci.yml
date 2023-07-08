@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+      - name: Install test dependencies
+        run: go install github.com/mfridman/tparse@latest
+      - name: Test
+        run: |
+          set -o pipefail
+          go test ./... -json | tee ./go-test.out | go run github.com/mfridman/tparse -all
+      - name: Add job summary
+        if: always()
+        run: |
+          go run github.com/mfridman/tparse -file ./go-test.out -format markdown >> $GITHUB_STEP_SUMMARY
