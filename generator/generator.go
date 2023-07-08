@@ -12,6 +12,10 @@ import (
 	"strings"
 )
 
+const (
+	mockgenPackage = "go.uber.org/mock/mockgen"
+)
+
 type Generator struct {
 	UseGoRun      bool
 	PackageName   string
@@ -37,7 +41,7 @@ func (g *Generator) Generate() error {
 	destination := filepath.Join(g.PackageName, g.PackageName+".go")
 	mockgen := "mockgen"
 	if g.UseGoRun {
-		mockgen = "go run go.uber.org/mock/mockgen"
+		mockgen = "go run " + mockgenPackage
 	}
 	var f io.Writer
 	if g.writer != nil {
