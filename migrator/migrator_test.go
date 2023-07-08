@@ -24,6 +24,7 @@ func TestGenerate(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var sb strings.Builder
 			tc.m.writer = &sb
+			tc.m.NoOverwriteInput = true
 
 			err := tc.m.Migrate()
 			if err != nil {
