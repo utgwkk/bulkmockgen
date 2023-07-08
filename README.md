@@ -40,3 +40,7 @@ package fixtures
 
 //go:generate go run go.uber.org/mock/mockgen -destination mock_foo/mock_foo.go -package mock_foo . IFoo,IBar
 ```
+
+## Restriction
+
+- Mockgengen is available for gomock's reflect mode. Source mode is currently not available.
