@@ -2,7 +2,11 @@ module github.com/utgwkk/mockgengen
 
 go 1.18
 
-require github.com/gkampitakis/go-snaps v0.4.8
+require (
+	github.com/gertd/go-pluralize v0.2.1
+	github.com/gkampitakis/go-snaps v0.4.8
+	github.com/stoewer/go-strcase v1.3.0
+)
 
 require (
 	github.com/gkampitakis/ciinfo v0.2.4 // indirect
