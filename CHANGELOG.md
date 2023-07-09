@@ -16,6 +16,23 @@ var MockInterfaces = []any{
 }
 ```
 
+- You can't still mock mixed external packages' interfaces at once like below:
+
+```go
+package mixedexternal
+
+import (
+	"database/sql"
+	"database/sql/driver"
+)
+
+// NG
+var Iset = []any{
+  new(sql.Result),
+  new(driver.Conn),
+}
+```
+
 ## Version 0.2.0 (2023/7/9)
 
 - Rename mockgengen to **bulkmockgen**
