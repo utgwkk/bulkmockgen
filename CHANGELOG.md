@@ -16,7 +16,7 @@ var MockInterfaces = []any{
 }
 ```
 
-- You can't still mock mixed external packages' interfaces at once like below:
+- You can't still mock mixed external packages' interfaces at once. Please split mock set and generatel one by one.
 
 ```go
 package mixedexternal
@@ -31,6 +31,16 @@ var Iset = []any{
 	new(sql.Result),
 	new(driver.Conn),
 }
+
+// OK
+var SqlSet = []any{
+	new(sql.Result),
+}
+
+var DriverSet = []any{
+	new(driver.Conn),
+}
+
 ```
 
 ## Version 0.2.0 (2023/7/9)
