@@ -9,6 +9,9 @@ package external
 
 import "database/sql/driver"
 
+// The below command is equivalent to:
+//   mockgen -package mock_driver -destination ./mock_driver/mock.go database/sql/driver Conn,Driver
+
 //go:generate bulkmockgen MockInterfaces -- -package mock_driver -destination ./mock_driver/mock.go
 var MockInterfaces = []any{
 	new(driver.Conn),
