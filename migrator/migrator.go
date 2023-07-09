@@ -110,7 +110,7 @@ func (m *Migrator) Migrate() error {
 	for _, pkgName := range keys {
 		is := interfacesByPackageName[pkgName]
 		varName := pluralizeClient.Plural(strcase.UpperCamelCase(pkgName))
-		w.Write([]byte(fmt.Sprintf("//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen %s -- -package %s -destination ./%s/%s.go\n", varName, pkgName, pkgName, pkgName)))
+		w.Write([]byte(fmt.Sprintf("//go:generate go run github.com/utgwkk/bulkmockgen/cmd/bulkmockgen %s -- -package %s -destination ./%s/%s.go\n", varName, pkgName, pkgName, pkgName)))
 		w.Write([]byte(fmt.Sprintf("var %s = []any{\n", varName)))
 		sort.Strings(is.interfaces)
 		for _, i := range is.interfaces {

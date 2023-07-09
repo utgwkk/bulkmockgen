@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/utgwkk/mockgengen/migrator"
+	"github.com/utgwkk/bulkmockgen/migrator"
 )
 
 var (
