@@ -50,6 +50,7 @@ var Iset = []any{
 ## Restriction
 
 - Mockgengen is available for gomock's reflect mode. Source mode is currently not available.
+- Mockgengen is not available for mocking interfaces in external packages of project.
 
 ## Migrate from mockgen
 
