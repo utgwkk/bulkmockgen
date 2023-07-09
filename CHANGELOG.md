@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next
+## Version 0.2.0 (2023/7/9)
 
 - Rename mockgengen to **bulkmockgen**
 
