@@ -11,8 +11,8 @@ import "database/sql/driver"
 
 //go:generate bulkmockgen MockInterfaces -- -package mock_driver -destination ./mock_driver/mock.go
 var MockInterfaces = []any{
-  new(driver.Conn),
-  new(driver.Driver),
+	new(driver.Conn),
+	new(driver.Driver),
 }
 ```
 
@@ -28,8 +28,8 @@ import (
 
 // NG
 var Iset = []any{
-  new(sql.Result),
-  new(driver.Conn),
+	new(sql.Result),
+	new(driver.Conn),
 }
 ```
 
