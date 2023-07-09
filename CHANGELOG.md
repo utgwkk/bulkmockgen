@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next
+## Version 0.2.1
 
 - Allow external package mocking like below:
 
