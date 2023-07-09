@@ -37,7 +37,7 @@ func main() {
 		MockSetName: mockSetName,
 		RestArgs:    args[restSeparatorIdx+1:],
 	}
-	rf := func(ctx context.Context, cmdExecutable string, cmdArgs... string) generator.Runner {
+	rf := func(ctx context.Context, cmdExecutable string, cmdArgs ...string) generator.Runner {
 		cmd := exec.CommandContext(ctx, cmdExecutable, cmdArgs...)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
