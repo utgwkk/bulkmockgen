@@ -2,11 +2,11 @@
 [TestGenerate/multi_file - 1]
 package multifile
 
-//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen MockBars -- -package mock_bar -destination ./mock_bar/mock_bar.go
+//go:generate go run github.com/utgwkk/bulkmockgen/cmd/bulkmockgen MockBars -- -package mock_bar -destination ./mock_bar/mock_bar.go
 var MockBars = []any{
     new(IBar),
 }
-//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen MockFoos -- -package mock_foo -destination ./mock_foo/mock_foo.go
+//go:generate go run github.com/utgwkk/bulkmockgen/cmd/bulkmockgen MockFoos -- -package mock_foo -destination ./mock_foo/mock_foo.go
 var MockFoos = []any{
     new(IFoo),
 }
@@ -16,7 +16,7 @@ var MockFoos = []any{
 [TestGenerate/multi_line - 1]
 package multiline
 
-//go:generate go run github.com/utgwkk/mockgengen/cmd/mockgengen MockFoos -- -package mock_foo -destination ./mock_foo/mock_foo.go
+//go:generate go run github.com/utgwkk/bulkmockgen/cmd/bulkmockgen MockFoos -- -package mock_foo -destination ./mock_foo/mock_foo.go
 var MockFoos = []any{
     new(IBar),
     new(IFoo),

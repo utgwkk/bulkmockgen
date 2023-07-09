@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next
+
+- Rename mockgengen to **bulkmockgen**
+
 ## Version 0.1.0 (2023/7/8)
 
 - **incompatible**: switch to wrap mockgen command

@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"os/signal"
 
-	"github.com/utgwkk/mockgengen/generator"
+	"github.com/utgwkk/bulkmockgen/generator"
 	"golang.org/x/exp/slices"
 )
 

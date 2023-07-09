@@ -1,4 +1,4 @@
-module github.com/utgwkk/mockgengen
+module github.com/utgwkk/bulkmockgen
 
 go 1.18
 

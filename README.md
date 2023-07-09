@@ -1,11 +1,11 @@
-# mockgengen
+# bulkmockgen
 
 Generate mock code all at once
 
 ## Installation
 
 ```
-go install github.com/utgwkk/mockgengen/cmd/mockgengen@latest
+go install github.com/utgwkk/bulkmockgen/cmd/bulkmockgen@latest
 ```
 
 ## Usage
@@ -31,15 +31,15 @@ var Iset = []any{
 ```
 
 ```
-$ mockgengen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
+$ bulkmockgen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
 ```
 
-You can use mockgengen with `go:generate` comment.
+You can use bulkmockgen with `go:generate` comment.
 
 ```go
 package foo
 
-//go:generate mockgengen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
+//go:generate bulkmockgen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
 
 var Iset = []any{
 	new(IFoo),
@@ -54,8 +54,8 @@ var Iset = []any{
 
 ## Migrate from mockgen
 
-There is a migration tool `mockgen-to-mockgengen`. You can rewrite `//go:generate mockgen` comments to mockgengen's all at once.
+There is a migration tool `mockgen-to-bulkmockgen`. You can rewrite `//go:generate mockgen` comments to bulkmockgen's all at once.
 
 ```
-go install github.com/utgwkk/mockgengen/cmd/mockgen-to-mockgengen@latest
+go install github.com/utgwkk/bulkmockgen/cmd/mockgen-to-bulkmockgen@latest
 ```
