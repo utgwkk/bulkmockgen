@@ -79,7 +79,7 @@ func (g *Generator) findMockSetFromDirectory(sourceDir string) ([]string, error)
 	}
 	for _, p := range parsed {
 		for _, f := range p.Files {
-			mockSet, err := lookupFromScope(f.Scope, g.MockSetName)
+			mockSet, err := lookupFromScope(fset, f.Scope, g.MockSetName)
 			if err != nil {
 				if errors.Is(err, errMockSetNotFound) {
 					continue
@@ -95,7 +95,7 @@ func (g *Generator) findMockSetFromDirectory(sourceDir string) ([]string, error)
 
 var errMockSetNotFound = errors.New("mock set notfound")
 
-func lookupFromScope(s *ast.Scope, mockSetName string) ([]string, error) {
+func lookupFromScope(fset *token.FileSet, s *ast.Scope, mockSetName string) ([]string, error) {
 	obj := s.Lookup(mockSetName)
 	if obj == nil {
 		return nil, errMockSetNotFound
@@ -112,34 +112,39 @@ func lookupFromScope(s *ast.Scope, mockSetName string) ([]string, error) {
 	for _, v := range vs.Values {
 		cmp, ok := v.(*ast.CompositeLit)
 		if !ok {
-			return nil, errors.New("not a interface slice")
+			return nil, newInvalidMockSetError("mock set is not a slice", fset, v)
 		}
 		for _, v := range cmp.Elts {
 			funCall, ok := v.(*ast.CallExpr)
 			if !ok {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("mock set contains not a function call", fset, v)
 			}
 			// new(...)
 			newIdent, ok := funCall.Fun.(*ast.Ident)
 			if !ok {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("mock set contains not a new(...) function call", fset, v)
 			}
 			if newIdent.Name != "new" {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("mock set contains not a new(...) function call", fset, v)
 			}
 			if len(funCall.Args) != 1 {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("mock set contains not a new(...) function call", fset, v)
 			}
 			arg := funCall.Args[0]
 			argIdent, ok := arg.(*ast.Ident)
 			if !ok {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("not an interface is passed to new(...) function call", fset, arg)
 			}
 			if len(funCall.Args) != 1 {
-				return nil, errors.New("invalid mock set (contains non-new(...) expression)")
+				return nil, newInvalidMockSetError("mock set contains not a new(...) function call", fset, v)
 			}
 			mockSet = append(mockSet, argIdent.Name)
 		}
 	}
 	return mockSet, nil
+}
+
+func newInvalidMockSetError(msg string, fset *token.FileSet, e ast.Expr) error {
+	pos := fset.Position(e.Pos())
+	return fmt.Errorf("%s at file %s, line %d, column %d", msg, pos.Filename, pos.Line, pos.Column)
 }
