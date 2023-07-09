@@ -34,6 +34,19 @@ var Iset = []any{
 $ mockgengen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
 ```
 
+You can use mockgengen with `go:generate` comment.
+
+```go
+package foo
+
+//go:generate mockgengen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
+
+var Iset = []any{
+	new(IFoo),
+	new(IBar),
+}
+```
+
 ## Restriction
 
 - Mockgengen is available for gomock's reflect mode. Source mode is currently not available.
