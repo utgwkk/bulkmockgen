@@ -1,6 +1,7 @@
 package migrator
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"go/ast"
@@ -17,6 +18,7 @@ import (
 	"github.com/gertd/go-pluralize"
 	"github.com/stoewer/go-strcase"
 	"golang.org/x/exp/maps"
+	"golang.org/x/tools/imports"
 )
 
 var mockgenCommandCandidates = []string{
@@ -126,16 +128,15 @@ func (m *Migrator) Migrate() error {
 			f.Comments = removeGoGenerateComment(f.Comments, comments)
 
 			err := func() error {
-				fout, err := os.CreateTemp(os.TempDir(), "mockgen-to-mockgengen")
+				var buf bytes.Buffer
+				if err := format.Node(&buf, fset, f); err != nil {
+					return err
+				}
+
+				importAdded, err := imports.Process(filename, buf.Bytes(), nil)
 				if err != nil {
 					return err
 				}
-				defer fout.Close()
-
-				if err := format.Node(fout, fset, f); err != nil {
-					return err
-				}
-				fout.Seek(0, 0)
 
 				srcFile, err := os.Create(filename)
 				if err != nil {
@@ -143,7 +144,7 @@ func (m *Migrator) Migrate() error {
 				}
 				defer srcFile.Close()
 
-				if _, err := io.Copy(srcFile, fout); err != nil {
+				if _, err := srcFile.Write(importAdded); err != nil {
 					return err
 				}
 
