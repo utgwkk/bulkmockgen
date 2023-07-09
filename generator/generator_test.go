@@ -55,6 +55,18 @@ func TestGenerate(t *testing.T) {
 			wantCmdExecutable: "go",
 			wantCmdArgs:       []string{"run", "go.uber.org/mock/mockgen", "-package", "mock_multifile", "-destination", "mock_multifile/mock.go", ".", "IFoo,IBar"},
 		},
+		{
+			name:    "with external package",
+			baseDir: "fixtures/external",
+			g: &Generator{
+				UseGoRun:    false,
+				DryRun:      false,
+				MockSetName: "MockInterfaces",
+				RestArgs:    []string{"-package", "mock_sql", "-destination", "mock_sql/mock.go"},
+			},
+			wantCmdExecutable: "mockgen",
+			wantCmdArgs:       []string{"-package", "mock_sql", "-destination", "mock_sql/mock.go", "database/sql/driver", "Conn,Driver"},
+		},
 	}
 	for _, tc := range testcases {
 		tc := tc
@@ -129,12 +141,18 @@ func TestLookupFromScope(t *testing.T) {
 			inputMockSetName: "Iset",
 			wantErrMsg:       "mock set is not a slice at file ./fixtures/ng/not_a_slice/prog.go, line 3, column 12",
 		},
+		{
+			name:             "mixed external packages",
+			inputFile:        "./fixtures/ng/mixed_external/prog.go",
+			inputMockSetName: "Iset",
+			wantErrMsg:       "mixing external package interfaces is not allowed at file ./fixtures/ng/mixed_external/prog.go, line 10, column 6",
+		},
 	}
 	for _, tc := range testcases {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			fset, s := prepareScope(t, tc.inputFile)
-			_, err := lookupFromScope(fset, s, tc.inputMockSetName)
+			_, _, err := lookupFromScope(fset, s, tc.inputMockSetName)
 			require.Error(t, err)
 			assert.Equal(t, tc.wantErrMsg, err.Error())
 		})
