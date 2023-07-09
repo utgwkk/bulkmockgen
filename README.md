@@ -50,7 +50,6 @@ var Iset = []any{
 ## Restriction
 
 - Bulkmockgen is available for gomock's reflect mode. Source mode is currently not available.
-- Bulkmockgen is not available for mocking interfaces in external packages of project.
 
 ## Migrate from mockgen
 
@@ -59,3 +58,5 @@ There is a migration tool `mockgen-to-bulkmockgen`. You can rewrite `//go:genera
 ```
 go install github.com/utgwkk/bulkmockgen/cmd/mockgen-to-bulkmockgen@latest
 ```
+
+Note that this migration tool can't migrate external interface mocking.

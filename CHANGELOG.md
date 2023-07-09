@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Next
+
+- Allow external package mocking like below:
+
+```go
+package external
+
+import "database/sql/driver"
+
+//go:generate bulkmockgen MockInterfaces -- -package mock_driver -destination ./mock_driver/mock.go
+var MockInterfaces = []any{
+  new(driver.Conn),
+  new(driver.Driver),
+}
+```
+
 ## Version 0.2.0 (2023/7/9)
 
 - Rename mockgengen to **bulkmockgen**
