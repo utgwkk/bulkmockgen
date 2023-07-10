@@ -7,6 +7,7 @@ require (
 	github.com/gkampitakis/go-snaps v0.4.8
 	github.com/stoewer/go-strcase v1.3.0
 	github.com/stretchr/testify v1.8.4
+	go.uber.org/mock v0.2.0
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
 	golang.org/x/tools v0.11.0
 )
