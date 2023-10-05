@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.2.2
+
+- add mockgen to tools dependencies ([#5](https://github.com/utgwkk/bulkmockgen/pull/5))
+
 ## Version 0.2.1
 
 - Allow external package mocking like below:
