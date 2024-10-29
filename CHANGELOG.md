@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Version 0.3.0
+
+- build(deps): bump github.com/stretchr/testify from 1.8.4 to 1.9.0 ([#8](https://github.com/utgwkk/bulkmockgen/pull/8))
+- build(deps): bump golang.org/x/tools from 0.11.0 to 0.26.0 ([#9](https://github.com/utgwkk/bulkmockgen/pull/9))
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.4.8 to 0.5.7 ([#10](https://github.com/utgwkk/bulkmockgen/pull/10))
+- build(deps): bump go.uber.org/mock from 0.2.0 to 0.5.0 ([#11](https://github.com/utgwkk/bulkmockgen/pull/11))
+- Use go 1.20 ([#12](https://github.com/utgwkk/bulkmockgen/pull/12))
+- Use go 1.22 ([#13](https://github.com/utgwkk/bulkmockgen/pull/13))
+- ci: disable Go dependency cache
+
 ## Version 0.2.2
 
 - add mockgen to tools dependencies ([#5](https://github.com/utgwkk/bulkmockgen/pull/5))
