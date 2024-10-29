@@ -1,6 +1,8 @@
 module github.com/utgwkk/bulkmockgen
 
-go 1.20
+go 1.22
+
+toolchain go1.22.8
 
 require (
 	github.com/gertd/go-pluralize v0.2.1
