@@ -10,7 +10,6 @@ require (
 	github.com/stoewer/go-strcase v1.3.0
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/mock v0.5.0
-	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
 	golang.org/x/tools v0.26.0
 )
 

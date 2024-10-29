@@ -8,8 +8,9 @@ import (
 	"os/exec"
 	"os/signal"
 
+	"slices"
+
 	"github.com/utgwkk/bulkmockgen/generator"
-	"golang.org/x/exp/slices"
 )
 
 var (

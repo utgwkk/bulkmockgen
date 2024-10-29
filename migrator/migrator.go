@@ -17,7 +17,7 @@ import (
 
 	"github.com/gertd/go-pluralize"
 	"github.com/stoewer/go-strcase"
-	"golang.org/x/exp/maps"
+	"github.com/utgwkk/bulkmockgen/migrator/internal"
 	"golang.org/x/tools/imports"
 )
 
@@ -103,8 +103,7 @@ func (m *Migrator) Migrate() error {
 	}
 
 	// output code with determinate order
-	keys := maps.Keys(interfacesByPackageName)
-	sort.Strings(keys)
+	keys := internal.MapKeys(interfacesByPackageName)
 
 	w.Write([]byte(fmt.Sprintf("package %s\n\n", sourcePkg)))
 	for _, pkgName := range keys {
