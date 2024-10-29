@@ -49,7 +49,7 @@ var Iset = []any{
 
 ## Restriction
 
-- Bulkmockgen is available for gomock's reflect mode. Source mode is currently not available.
+- Bulkmockgen is available for gomock's package mode. Source mode is currently not available.
 
 ## Migrate from mockgen
 
