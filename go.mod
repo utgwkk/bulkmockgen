@@ -1,6 +1,6 @@
 module github.com/utgwkk/bulkmockgen
 
-go 1.22
+go 1.22.0
 
 toolchain go1.22.8
 
@@ -11,7 +11,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/mock v0.5.0
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
-	golang.org/x/tools v0.22.0
+	golang.org/x/tools v0.26.0
 )
 
 require (
@@ -27,7 +27,7 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
-	golang.org/x/mod v0.18.0 // indirect
-	golang.org/x/sync v0.7.0 // indirect
+	golang.org/x/mod v0.21.0 // indirect
+	golang.org/x/sync v0.8.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
