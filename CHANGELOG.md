@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [v0.3.1](https://github.com/utgwkk/bulkmockgen/compare/v0.3.0...v0.3.1) - 2025-02-04
+- Remove golang.org/x/exp dependency by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/14
+- deps: configure GitHub Actions dependabot update by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/15
+- build(deps): bump actions/checkout from 3 to 4 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/16
+- build(deps): bump actions/setup-go from 4 to 5 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/17
+- doc: reflect mode is deprecated and package mode is introduced by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/18
+- build(deps): bump golang.org/x/tools from 0.26.0 to 0.27.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/19
+- build(deps): bump github.com/stretchr/testify from 1.9.0 to 1.10.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/20
+- build(deps): bump golang.org/x/tools from 0.27.0 to 0.28.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/21
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.7 to 0.5.8 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/22
+- build(deps): bump golang.org/x/tools from 0.28.0 to 0.29.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/23
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.8 to 0.5.9 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/24
+- tagpr by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/25
+
 ## Version 0.3.0
 
 - build(deps): bump github.com/stretchr/testify from 1.8.4 to 1.9.0 ([#8](https://github.com/utgwkk/bulkmockgen/pull/8))
