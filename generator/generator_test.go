@@ -35,7 +35,7 @@ func TestGenerate(t *testing.T) {
 			name:    "basic",
 			baseDir: "fixtures/multifile",
 			g: &Generator{
-				UseGoRun:    false,
+				ExecMode:    ExecModeDirect,
 				DryRun:      false,
 				MockSetName: "MockInterfaces",
 				RestArgs:    []string{"-package", "mock_multifile", "-destination", "mock_multifile/mock.go"},
@@ -47,7 +47,7 @@ func TestGenerate(t *testing.T) {
 			name:    "with go run",
 			baseDir: "fixtures/multifile",
 			g: &Generator{
-				UseGoRun:    true,
+				ExecMode:    ExecModeGoRun,
 				DryRun:      false,
 				MockSetName: "MockInterfaces",
 				RestArgs:    []string{"-package", "mock_multifile", "-destination", "mock_multifile/mock.go"},
@@ -56,10 +56,22 @@ func TestGenerate(t *testing.T) {
 			wantCmdArgs:       []string{"run", "go.uber.org/mock/mockgen", "-package", "mock_multifile", "-destination", "mock_multifile/mock.go", ".", "IFoo,IBar"},
 		},
 		{
+			name:    "with go tool",
+			baseDir: "fixtures/multifile",
+			g: &Generator{
+				ExecMode:    ExecModeGoTool,
+				DryRun:      false,
+				MockSetName: "MockInterfaces",
+				RestArgs:    []string{"-package", "mock_multifile", "-destination", "mock_multifile/mock.go"},
+			},
+			wantCmdExecutable: "go",
+			wantCmdArgs:       []string{"tool", "go.uber.org/mock/mockgen", "-package", "mock_multifile", "-destination", "mock_multifile/mock.go", ".", "IFoo,IBar"},
+		},
+		{
 			name:    "with external package",
 			baseDir: "fixtures/external",
 			g: &Generator{
-				UseGoRun:    false,
+				ExecMode:    ExecModeDirect,
 				DryRun:      false,
 				MockSetName: "MockInterfaces",
 				RestArgs:    []string{"-package", "mock_sql", "-destination", "mock_sql/mock.go"},

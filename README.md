@@ -31,7 +31,7 @@ var Iset = []any{
 ```
 
 ```
-$ bulkmockgen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
+$ bulkmockgen -exec_mode go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
 ```
 
 You can use bulkmockgen with `go:generate` comment.
@@ -39,7 +39,7 @@ You can use bulkmockgen with `go:generate` comment.
 ```go
 package foo
 
-//go:generate bulkmockgen -use_go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
+//go:generate bulkmockgen -exec_mode go_run Iset -- -package mock_foo -destination ./mock_foo/mock.go
 
 var Iset = []any{
 	new(IFoo),
