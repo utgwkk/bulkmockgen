@@ -24,6 +24,8 @@ const (
 	ExecModeDirect ExecMode = iota + 1
 
 	ExecModeGoRun
+
+	ExecModeGoTool
 )
 
 func (e ExecMode) Command() (string, []string) {
@@ -32,6 +34,8 @@ func (e ExecMode) Command() (string, []string) {
 		return "mockgen", []string{}
 	case ExecModeGoRun:
 		return "go", []string{"run", mockgenPackage}
+	case ExecModeGoTool:
+		return "go", []string{"tool", mockgenPackage}
 	default:
 		panic("unsupported exec mode")
 	}

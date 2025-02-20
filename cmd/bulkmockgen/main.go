@@ -16,6 +16,8 @@ import (
 var (
 	useGoRun = flag.Bool("use_go_run", false, "Whether to use go run command to execute mockgen; defaults to false")
 
+	flagExecMode = flag.String("exec_mode", "direct", "How to execute mockgen. Supported values are: direct, go_run, go_tool")
+
 	dryRun = flag.Bool("dry_run", false, "Print command to be executed and exit")
 )
 
@@ -36,6 +38,17 @@ func main() {
 	execMode := generator.ExecModeDirect
 	if *useGoRun {
 		execMode = generator.ExecModeGoRun
+	} else {
+		switch *flagExecMode {
+		case "direct":
+			execMode = generator.ExecModeDirect
+		case "go_run":
+			execMode = generator.ExecModeGoRun
+		case "go_tool":
+			execMode = generator.ExecModeGoTool
+		default:
+			log.Fatalf("unsupported exec mode (%s)", *flagExecMode)
+		}
 	}
 	g := &generator.Generator{
 		ExecMode:    execMode,
