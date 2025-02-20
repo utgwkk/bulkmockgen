@@ -18,10 +18,29 @@ const (
 	mockgenPackage = "go.uber.org/mock/mockgen"
 )
 
+type ExecMode int
+
+const (
+	ExecModeDirect ExecMode = iota + 1
+
+	ExecModeGoRun
+)
+
+func (e ExecMode) Command() (string, []string) {
+	switch e {
+	case ExecModeDirect:
+		return "mockgen", []string{}
+	case ExecModeGoRun:
+		return "go", []string{"run", mockgenPackage}
+	default:
+		panic("unsupported exec mode")
+	}
+}
+
 type runnerFactory func(ctx context.Context, cmdExecutable string, cmdArgs ...string) Runner
 
 type Generator struct {
-	UseGoRun    bool
+	ExecMode    ExecMode
 	DryRun      bool
 	MockSetName string
 	RestArgs    []string
@@ -33,14 +52,7 @@ func (g *Generator) Generate(ctx context.Context, rf runnerFactory) error {
 		return err
 	}
 
-	var cmdExecutable string
-	var cmdArgs []string
-	if g.UseGoRun {
-		cmdExecutable = "go"
-		cmdArgs = append(cmdArgs, "run", mockgenPackage)
-	} else {
-		cmdExecutable = "mockgen"
-	}
+	cmdExecutable, cmdArgs := g.ExecMode.Command()
 	cmdArgs = append(cmdArgs, g.RestArgs...)
 	if externalPkg != "" {
 		cmdArgs = append(cmdArgs, externalPkg)
@@ -100,7 +112,7 @@ func (g *Generator) findMockSetFromDirectory(sourceDir string) ([]string, string
 					}
 
 					splittedImpPath := strings.Split(impPath, "/")
-					if externalPkg == splittedImpPath[len(splittedImpPath) - 1] {
+					if externalPkg == splittedImpPath[len(splittedImpPath)-1] {
 						externalPkg = impPath
 						break
 					}

@@ -15,7 +15,8 @@ import (
 
 var (
 	useGoRun = flag.Bool("use_go_run", false, "Whether to use go run command to execute mockgen; defaults to false")
-	dryRun   = flag.Bool("dry_run", false, "Print command to be executed and exit")
+
+	dryRun = flag.Bool("dry_run", false, "Print command to be executed and exit")
 )
 
 func main() {
@@ -32,8 +33,12 @@ func main() {
 		log.Fatal("rest separator (--) is required")
 	}
 
+	execMode := generator.ExecModeDirect
+	if *useGoRun {
+		execMode = generator.ExecModeGoRun
+	}
 	g := &generator.Generator{
-		UseGoRun:    *useGoRun,
+		ExecMode:    execMode,
 		DryRun:      *dryRun,
 		MockSetName: mockSetName,
 		RestArgs:    args[restSeparatorIdx+1:],
