@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	useGoRun = flag.Bool("use_go_run", false, "Whether to use go run command to execute mockgen; defaults to false")
+	useGoRun = flag.Bool("use_go_run", false, "(Deprecated) Whether to use go run command to execute mockgen; defaults to false")
 
 	flagExecMode = flag.String("exec_mode", "direct", "How to execute mockgen. Supported values are: direct, go_run, go_tool")
 
