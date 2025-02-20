@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [v0.4.0](https://github.com/utgwkk/bulkmockgen/compare/v0.3.1...v0.4.0) - 2025-02-20
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.9 to 0.5.10 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/27
+- build(deps): bump golang.org/x/tools from 0.29.0 to 0.30.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/28
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.10 to 0.5.11 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/30
+- Support `go tool` command and deprecate `-use_go_run` argument by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/31
+
 ## [v0.3.1](https://github.com/utgwkk/bulkmockgen/compare/v0.3.0...v0.3.1) - 2025-02-04
 - Remove golang.org/x/exp dependency by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/14
 - deps: configure GitHub Actions dependabot update by @utgwkk in https://github.com/utgwkk/bulkmockgen/pull/15
