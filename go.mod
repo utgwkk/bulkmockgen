@@ -1,15 +1,14 @@
 module github.com/utgwkk/bulkmockgen
 
 go 1.22.0
-
-toolchain go1.22.8
+toolchain go1.24.1
 
 require (
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gkampitakis/go-snaps v0.5.11
 	github.com/stoewer/go-strcase v1.3.0
 	github.com/stretchr/testify v1.10.0
-	go.uber.org/mock v0.5.1
+	go.uber.org/mock v0.5.2
 	golang.org/x/tools v0.30.0
 )
 
