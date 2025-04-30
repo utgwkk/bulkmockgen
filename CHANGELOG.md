@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v0.4.1](https://github.com/utgwkk/bulkmockgen/compare/v0.4.0...v0.4.1) - 2025-04-30
+- build(deps): bump go.uber.org/mock from 0.5.0 to 0.5.1 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/33
+- build(deps): bump go.uber.org/mock from 0.5.1 to 0.5.2 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/36
+
 ## [v0.4.0](https://github.com/utgwkk/bulkmockgen/compare/v0.3.1...v0.4.0) - 2025-02-20
 - build(deps): bump github.com/gkampitakis/go-snaps from 0.5.9 to 0.5.10 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/27
 - build(deps): bump golang.org/x/tools from 0.29.0 to 0.30.0 by @dependabot in https://github.com/utgwkk/bulkmockgen/pull/28
