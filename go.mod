@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/gertd/go-pluralize v0.2.1
-	github.com/gkampitakis/go-snaps v0.5.13
+	github.com/gkampitakis/go-snaps v0.5.14
 	github.com/stoewer/go-strcase v1.3.1
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/mock v0.5.2
