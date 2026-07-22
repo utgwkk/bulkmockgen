@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [v0.4.4](https://github.com/utgwkk/bulkmockgen/compare/v0.4.3...v0.4.4) - 2026-07-22
+
+- build(deps): bump golang.org/x/tools from 0.43.0 to 0.44.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/65
+- build(deps): bump golang.org/x/tools from 0.44.0 to 0.45.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/67
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.21 to 0.5.22 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/68
+- build(deps): bump golang.org/x/tools from 0.45.0 to 0.46.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/69
+- build(deps): bump golang.org/x/tools from 0.46.0 to 0.47.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/71
+- build(deps): bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/70
+- build(deps): bump golang.org/x/tools from 0.47.0 to 0.48.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/73
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.22 to 0.5.23 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/72
+- build(deps): bump actions/setup-go from 6 to 7 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/74
+
 ## [v0.4.3](https://github.com/utgwkk/bulkmockgen/compare/v0.4.2...v0.4.3) - 2026-03-20
 - build(deps): bump go.uber.org/mock from 0.5.2 to 0.6.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/46
 - build(deps): bump github.com/stretchr/testify from 1.10.0 to 1.11.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/47
