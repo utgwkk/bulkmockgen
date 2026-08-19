@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [v0.4.5](https://github.com/utgwkk/bulkmockgen/compare/v0.4.4...v0.4.5) - 2026-08-18
+
+- build(deps): bump github.com/stretchr/testify from 1.11.1 to 1.12.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/76
+- build(deps): bump golang.org/x/tools from 0.48.0 to 0.49.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/75
+
 ## [v0.4.4](https://github.com/utgwkk/bulkmockgen/compare/v0.4.3...v0.4.4) - 2026-07-22
 
 - build(deps): bump golang.org/x/tools from 0.43.0 to 0.44.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/65
