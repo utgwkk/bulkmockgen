@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [v0.4.8](https://github.com/utgwkk/bulkmockgen/compare/v0.4.7...v0.4.8) - 2026-11-24
+
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.23 to 0.5.24 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/84
+- build(deps): bump github.com/gkampitakis/go-snaps from 0.5.24 to 0.5.25 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/86
+- build(deps): bump golang.org/x/tools from 0.52.0 to 0.53.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/87
+- build(deps): bump github.com/stoewer/go-strcase from 1.3.1 to 1.4.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/88
+
 ## [v0.4.7](https://github.com/utgwkk/bulkmockgen/compare/v0.4.6...v0.4.7) - 2026-10-14
 
 - build(deps): bump golang.org/x/tools from 0.50.0 to 0.51.0 by @dependabot[bot] in https://github.com/utgwkk/bulkmockgen/pull/81
