@@ -5,7 +5,7 @@ go 1.26.0
 require (
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gkampitakis/go-snaps v0.5.25
-	github.com/stoewer/go-strcase v1.3.1
+	github.com/stoewer/go-strcase v1.4.0
 	github.com/stretchr/testify v1.12.1
 	go.uber.org/mock v0.6.0
 	golang.org/x/tools v0.53.0
